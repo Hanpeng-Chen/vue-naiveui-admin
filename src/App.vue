@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { storeToRefs } from 'pinia'
+import useAppStore from './stores/app'
+const appStore = useAppStore()
+const { locale, dateLocale } = storeToRefs(appStore)
 </script>
 
 <template>
@@ -17,7 +21,9 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
-  <RouterView />
+  <n-config-provider :locale="locale" :date-locale="dateLocale">
+    <RouterView />
+  </n-config-provider>
 </template>
 
 <style scoped>
